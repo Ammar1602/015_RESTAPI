@@ -34,16 +34,22 @@ import com.example.aplikasidatasiswa.model.Kontak
 import com.example.aplikasidatasiswa.ui.Home.ViewModel.KontakUIState
 
 @Composable
-fun HomeScreen(
+fun HomeStatus(
     kontakUIState: KontakUIState,
     retryAction: () -> Unit,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    onDeleteClick: (Kontak) -> Unit = {},
+    onDetailClick: (Kontak) -> Unit,
 ){
     when (kontakUIState){
         is KontakUIState.Loading -> OnLoading(modifier = modifier.fillMaxSize())
         is KontakUIState.Success -> KontakLayout(
-            kontak = kontakUIState.kontak, modifier = modifier.fillMaxWidth().clickable {
-
+            kontak = kontakUIState.kontak, modifier = modifier.fillMaxWidth(),
+            onDetailClick = {
+                onDetailClick(it.id)
+            },
+            onDeleteClick = {
+                onDeleteClick(it)
             }
         )
         is KontakUIState.Error -> OnError(retryAction, modifier = modifier.fillMaxSize())
