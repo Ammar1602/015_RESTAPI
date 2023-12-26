@@ -17,3 +17,10 @@ data class InsertUiState(
     val inserUiEvent: InsertUiEvent = InsertUiEvent(),
 )
 
+data class InsertUiEvent(
+    val id: Int = 0,
+    val nama: String = "",
+    val email: String = "",
+    val nohp: String = "",
+)
+
