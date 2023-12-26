@@ -10,6 +10,9 @@ import com.example.aplikasidatasiswa.repository.KontakRepository
 import kotlinx.coroutines.launch
 
 class InsertViewModel(private val kontakRepository: KontakRepository) : ViewModel(){
+    var insertKontakState by mutableStateOf(InsertUiState())
+        private set
+
 
 }
 
