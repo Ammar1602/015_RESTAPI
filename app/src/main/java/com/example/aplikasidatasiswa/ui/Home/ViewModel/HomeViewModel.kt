@@ -2,6 +2,7 @@ package com.example.aplikasidatasiswa.ui.Home.ViewModel
 
 import android.net.http.HttpException
 import android.os.Build
+import androidx.annotation.IdRes
 import androidx.annotation.RequiresExtension
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -37,6 +38,19 @@ class HomeViewModel (private val kontakRepository: KontakRepository) : ViewModel
             } catch (e: IOException){
                 KontakUIState.Error
             } catch (e: retrofit2.HttpException){
+                KontakUIState.Error
+            }
+        }
+    }
+
+    @RequiresExtension(extension = Build.VERSION_CODES.S, version = 7)
+    fun deleteKontak(id: Int){
+        viewModelScope.launch{
+            try {
+                kontakRepository.deleteKontak(id)
+            }catch (e: IOException){
+                KontakUIState.Error
+            }catch (e: HttpException){
                 KontakUIState.Error
             }
         }
